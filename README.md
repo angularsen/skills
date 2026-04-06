@@ -12,7 +12,7 @@ npx skills add angularsen/skills
 
 | Skill | Description |
 |-------|-------------|
-| [clonvex-dev-setup](skills/clonvex-dev-setup/) | Bootstrap a Clerk + Convex + Next.js project with local and cloud dev modes |
+| [clonvex-dev-setup](skills/clonvex-dev-setup/) | Bootstrap a Clerk + Convex project with local and cloud dev modes (framework-agnostic) |
 
 ## Creating Skills
 
