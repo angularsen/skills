@@ -31,7 +31,12 @@ Find the installed skill directory before running scripts. Common project-local 
 - `.claude/skills/shy`
 - `.cursor/skills/shy`
 
-Prefer `.agents/skills/shy` when it exists. In the examples below, replace `.agents/skills/shy` with the actual installed directory if needed.
+Common user-global locations are:
+
+- `$HOME/.agents/skills/shy` or `%USERPROFILE%\.agents\skills\shy`
+- `$HOME/.codex/skills/shy` or `%USERPROFILE%\.codex\skills\shy`
+
+Prefer `.agents/skills/shy` when it exists. If the skill was installed globally with `skills.sh`, use the matching user-global path. In the examples below, replace `.agents/skills/shy` with the actual installed directory if needed.
 
 ## Generate Analysis
 
@@ -87,8 +92,45 @@ Useful checks:
 
 ```bash
 git diff --name-only --diff-filter=U
-git grep -n "<<<<<<<\\|=======\\|>>>>>>>" -- .
+git grep -n -E "^(<<<<<<<|=======|>>>>>>>)" -- .
 ```
+
+## Codex/Windows Fallbacks
+
+When running from Codex on Windows, the current shell is often PowerShell while
+Shy's helpers are Bash scripts. Prefer Git Bash for the scripts when available,
+especially for linked worktrees whose `.git` file points at a Windows path such
+as `X:/...`; WSL Bash may report "not a git repository" because it cannot
+resolve that `gitdir`.
+
+If a Bash helper fails with CRLF/shebang errors, use a normalized temporary copy
+of the skill scripts or fall back to the manual workflow below. The source skill
+should force LF for `*.sh`, but installed global copies may predate that fix.
+
+Manual workflow when helpers cannot run:
+
+1. Confirm the active conflict:
+   ```bash
+   git status
+   git diff --name-only --diff-filter=U
+   ```
+2. For each conflicted file, inspect the three sides:
+   ```bash
+   git diff --base -- path/to/file
+   git diff --ours -- path/to/file
+   git diff --theirs -- path/to/file
+   git show :1:path/to/file   # merge base
+   git show :2:path/to/file   # ours / HEAD
+   git show :3:path/to/file   # theirs / incoming
+   ```
+3. Resolve by the Core Rule, stage with `git add path/to/file`, then verify:
+   ```bash
+   git diff --name-only --diff-filter=U
+   git grep -n -E "^(<<<<<<<|=======|>>>>>>>)" -- .
+   ```
+
+Use the anchored grep above. A broad search for `=======` can match decorative
+separator lines in scripts and create false alarms.
 
 ## Resolution Heuristics
 
