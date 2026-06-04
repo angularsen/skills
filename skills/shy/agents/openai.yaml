@@ -1,0 +1,4 @@
+interface:
+  display_name: "Shy"
+  short_description: "Careful Git conflict resolution"
+  default_prompt: "Use $shy to analyze and resolve the active Git merge or rebase conflict."
