@@ -17,6 +17,10 @@ git status
 
 If `git status` shows no unmerged paths, tell the user there is no active conflict. If there are unmerged paths, continue with the workflow.
 
+On Windows/PowerShell, run `git status` with native Git first and treat it as
+authoritative. Do not rely on WSL/Bash helpers to detect the rebase state if
+they disagree with native Git.
+
 ## Core Rule
 
 For merges, preserve the intent from both branches whenever compatible.
@@ -103,6 +107,12 @@ especially for linked worktrees whose `.git` file points at a Windows path such
 as `X:/...`; WSL Bash may report "not a git repository" because it cannot
 resolve that `gitdir`.
 
+Quote Git revspecs that PowerShell may parse as syntax. For example:
+
+```powershell
+git rev-parse --abbrev-ref --symbolic-full-name '@{u}'
+```
+
 If a Bash helper fails with CRLF/shebang errors, use a normalized temporary copy
 of the skill scripts or fall back to the manual workflow below. The source skill
 should force LF for `*.sh`, but installed global copies may predate that fix.
@@ -164,3 +174,20 @@ When all conflicts are resolved:
 3. Review `output/verification-checklist.md`.
 4. Run the project's build or test command if discoverable.
 5. Tell the user whether they should continue with `git merge --continue`, `git rebase --continue`, or a normal merge commit.
+
+For rebases, continue non-interactively unless the user explicitly wants to
+edit the replayed commit message:
+
+```bash
+GIT_EDITOR=true git rebase --continue
+```
+
+In PowerShell:
+
+```powershell
+git -c core.editor=true rebase --continue
+```
+
+When verification depends on generated files, run generation and type checks
+sequentially. For example, run Convex codegen first and wait for it to finish,
+then run `tsc --noEmit`; do not run them in parallel.

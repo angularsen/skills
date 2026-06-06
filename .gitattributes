@@ -1,1 +1,21 @@
+* text=auto eol=lf
+
+# Skill bundles are copied directly by installers such as skills.sh / npx skills.
+# Keep executable helpers and prompt docs LF-only so Bash works after install on
+# Windows, WSL, macOS, and Linux.
 *.sh text eol=lf
+*.md text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+*.ps1 text eol=lf
+
+# Common binary assets for future skills.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
+*.zip binary
