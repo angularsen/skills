@@ -1,0 +1,6 @@
+interface:
+  display_name: "Babysit PR"
+  short_description: "Cross-provider PR review, fixes, CI and re-review"
+  default_prompt: "Use $babysit-pr on the PRs from this session, with an independent reviewer from the other provider."
+policy:
+  allow_implicit_invocation: true

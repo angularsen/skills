@@ -24,6 +24,22 @@ npx skills add angularsen/skills --skill shy --agent claude-code codex --global
 
 Adjust `--agent` for the tools you use, such as adding `cursor`. The Skills CLI also supports `--agent '*'`, but that installs to every known agent layout and is usually more than a project needs.
 
+Install Babysit PR globally for Codex and Claude Code on each machine:
+
+```bash
+npx skills add angularsen/skills --skill babysit-pr --agent claude-code codex --global --yes
+```
+
+Invoke with `$babysit-pr` in Codex, `/babysit-pr` in Claude Code, or ask “babysit these PRs.” It infers PRs from the session or accepts URLs, coordinates an independent reviewer from the other provider, addresses feedback and CI, and defaults to handing the result back for user re-review. Auto-complete requires your authorization.
+
+The reviewer helper needs Node.js and the selected reviewer CLI (`codex` or `claude`) installed and authenticated on that machine. GitHub/Azure access uses the author's existing tools or authenticated CLI. Paths and frontier model IDs are resolved on the host; no machine-specific configuration or credentials ship with the skill. The installed Claude skill provides its own slash command, so no extra command wrapper is needed.
+
+Update the installed copy later with:
+
+```bash
+npx skills update babysit-pr --global --yes
+```
+
 Claude Code can invoke installed skills directly with `/shy`. The older `/shy:resolve`, `/shy:analyze`, and `/shy:reset` command wrappers are Claude-specific and are not installed by `skills.sh`. To install those optional wrappers from a local clone:
 
 ```bash
@@ -40,6 +56,7 @@ bash scripts/install-claude-shy-commands.sh --user
 
 | Skill | Description |
 |-------|-------------|
+| [babysit-pr](skills/babysit-pr/) | Coordinate cross-provider PR review, fixes, CI and re-review with a user-controlled completion policy |
 | [clonvex-dev-setup](skills/clonvex-dev-setup/) | Bootstrap a Clerk + Convex project with local and cloud dev modes (framework-agnostic) |
 | [shy](skills/shy/) | Analyze and resolve Git merge/rebase conflicts with generated 3-way diffs and careful rebase scope checks |
 
