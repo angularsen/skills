@@ -52,10 +52,21 @@ bash scripts/install-claude-shy-commands.sh --user
 .\scripts\install-claude-shy-commands.ps1 -User
 ```
 
+## Agent cleanup
+
+Install globally on any machine with an agent that supports skills:
+
+```bash
+npx skills add angularsen/skills --skill agent-cleanup --agent claude-code codex --global --yes
+```
+
+Invoke with `$agent-cleanup` in Codex, `/agent-cleanup` in Claude Code, or ask to clean up leftover agent processes. Uses available host tools on macOS, Linux, or Windows; no bundled daemon or cleanup dependency.
+
 ## Skills
 
 | Skill | Description |
 |-------|-------------|
+| [agent-cleanup](skills/agent-cleanup/) | Reclaim CPU and memory from leftover agent sessions, dev servers, tests, and automation helpers |
 | [babysit-pr](skills/babysit-pr/) | Coordinate cross-provider PR review, fixes, CI and re-review with a user-controlled completion policy |
 | [clonvex-dev-setup](skills/clonvex-dev-setup/) | Bootstrap a Clerk + Convex project with local and cloud dev modes (framework-agnostic) |
 | [shy](skills/shy/) | Analyze and resolve Git merge/rebase conflicts with generated 3-way diffs and careful rebase scope checks |
