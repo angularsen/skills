@@ -1,0 +1,4 @@
+interface:
+  display_name: "Squash Feature Branch"
+  short_description: "Squash safely onto main with recoverable history"
+  default_prompt: "Use $squash-feature-branch to checkpoint this feature and changed submodules, merge the latest default branches, squash, and publish with protected-branch checks and explicit leases."

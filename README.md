@@ -52,6 +52,16 @@ bash scripts/install-claude-shy-commands.sh --user
 .\scripts\install-claude-shy-commands.ps1 -User
 ```
 
+## Squash feature branch
+
+Install globally after this skill is published:
+
+```bash
+npx skills add angularsen/skills --skill squash-feature-branch --agent claude-code codex --global --yes
+```
+
+Invoke with `$squash-feature-branch` in Codex, `/squash-feature-branch` in Claude Code, or ask to “merge latest main and squash this feature branch.” It checkpoints and integrates changed submodule branches too, preserves recovery refs, and checks protected branches before an authorized force-with-lease push. Requires Git and authenticated access to the repository host to inspect branch protection and publish.
+
 ## Agent cleanup
 
 Install globally on any machine with an agent that supports skills:
@@ -69,6 +79,7 @@ Invoke with `$agent-cleanup` in Codex, `/agent-cleanup` in Claude Code, or ask t
 | [agent-cleanup](skills/agent-cleanup/) | Reclaim CPU and memory from leftover agent sessions, dev servers, tests, and automation helpers |
 | [babysit-pr](skills/babysit-pr/) | Coordinate cross-provider PR review, fixes, CI and re-review with a user-controlled completion policy |
 | [clonvex-dev-setup](skills/clonvex-dev-setup/) | Bootstrap a Clerk + Convex project with local and cloud dev modes (framework-agnostic) |
+| [squash-feature-branch](skills/squash-feature-branch/) | Checkpoint, merge main, squash feature/submodule branches and publish with explicit leases |
 | [shy](skills/shy/) | Analyze and resolve Git merge/rebase conflicts with generated 3-way diffs and careful rebase scope checks |
 
 ## Creating Skills
