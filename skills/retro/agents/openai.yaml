@@ -1,0 +1,5 @@
+interface:
+  display_name: "Retro"
+  short_description: "Find improvements from agent session evidence"
+policy:
+  allow_implicit_invocation: false
