@@ -21,8 +21,9 @@ surfaces, provide a faithful captured snapshot and state the access limit.
 ## Review and fix
 
 The reviewer independently checks which rules apply and checks the actual
-artifacts against them. Do not accept an author's checked box as proof. Check XML
-doc meaning as well as presence: relevant units, null/empty behavior, time zone,
+artifacts against them. Do not accept an author's checked box as proof. Check API
+documentation (for example XML docs, JSDoc or docstrings) for meaning as well as
+presence: relevant units, null/empty behavior, time zone,
 side effects and restrictions must match the implementation. Check that the PR
 body describes the final behavior and real verification, and that document titles,
 structure and linked evidence follow the repository's publishing rules.
