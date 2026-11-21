@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 
 export function validateRequest(r) {
   if (!['codex', 'claude'].includes(r.provider)) throw Error('provider must be codex or claude');
-  if (!['medium', 'high'].includes(r.effort)) throw Error('effort must be medium or high');
+  if (!['medium', 'high', 'xhigh'].includes(r.effort)) throw Error('effort must be medium, high or xhigh');
   for (const key of ['model', 'cwd', 'promptFile', 'roundId']) {
     if (typeof r[key] !== 'string' || !r[key].trim()) throw Error(`Missing ${key}`);
   }
