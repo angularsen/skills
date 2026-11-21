@@ -7,14 +7,14 @@ import { buildArgs, readEvents, run } from './reviewer.mjs';
 
 const request = { provider: 'codex', model: 'frontier-test', effort: 'high', cwd: '.', promptFile: 'brief.md', roundId: 'r1' };
 test('both providers explicitly preserve medium/high on exact-session resume', () => {
-  for (const provider of ['codex', 'claude']) for (const effort of ['medium', 'high']) {
+  for (const provider of ['codex', 'claude']) for (const effort of ['medium', 'high', 'xhigh']) {
     const args = buildArgs({ ...request, provider, effort }, 'reviewer-session');
     assert.ok(args.includes('reviewer-session'));
     assert.ok(args.some(v => v.includes(effort)));
     assert.ok(!args.includes('--last'));
     assert.ok(!args.some(v => /bypass/i.test(v)));
   }
-  for (const effort of ['low', 'ultra', 'max', 'xhigh']) assert.throws(() => buildArgs({ ...request, effort }));
+  for (const effort of ['low', 'ultra', 'max']) assert.throws(() => buildArgs({ ...request, effort }));
 });
 test('a partial or failed turn is not a completed review', () => {
   assert.equal(readEvents('codex', JSON.stringify({ type: 'item.completed', item: { type: 'agent_message', text: 'Looks fine' } })).completed, false);

@@ -20,9 +20,15 @@ The author coordinates and makes code/PR changes. A separate reviewer checks the
 
 ## Reviewer selection
 
-Honor explicit choices; otherwise Claude authors use Codex reviewers and Codex authors use Claude reviewers. Resolve an available frontier model from the installed CLI/account or current official documentation. Don't guess IDs from display labels or silently substitute a cheaper model/provider. Record provider/model/effort and any fallback.
+Honor explicit choices; otherwise Claude authors use Codex reviewers and Codex authors use Claude reviewers. Size the reviewer to the PR:
 
-Pass **medium** for bounded work or small re-reviews; **high** for cross-service behavior, concurrency, payments, authorization, migrations or subtle state changes. Never default to low or ultra/max/xhigh. The helper accepts medium/high; an explicit user override requires adapting it. Report access/model failures and batch necessary fallback decisions.
+| PR | Codex reviewer | Claude reviewer | Effort |
+| --- | --- | --- | --- |
+| Default | newest **Sol** (e.g. `gpt-6.2-sol`) | newest **Opus** (e.g. `claude-opus-5-5`) | high |
+| Small, or a re-review of a bounded fix | same | same | medium |
+| Exceptionally large or risky (many services, payments, auth, data migrations with backfills, concurrency) | newest **Astra** | newest **Fable** | high, or xhigh when justified |
+
+Pick the newest version of the family from the installed CLI/account or current official documentation; the IDs above are examples that age. Don't guess IDs from display labels or silently substitute a cheaper model/provider. Record provider/model/effort, why the tier was chosen and any fallback. Never use low, max or ultra. Keep one model per loop; changing it needs a fresh reviewer session, so choose the tier up front and escalate only when a round shows the PR needs it. Report access/model failures and batch necessary fallback decisions.
 
 ## Work the loop
 

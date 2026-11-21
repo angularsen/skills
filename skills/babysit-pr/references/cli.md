@@ -17,7 +17,7 @@ Prepare isolated reviewer checkouts and a persistent local session directory out
 }
 ```
 
-Run `node <skill>/scripts/reviewer.mjs REQUEST.json SESSION_DIR --dry-run` to inspect without invoking a model; omit `--dry-run` to execute. Resume using same directory and a new round ID, writing a new request and brief file per round (never overwrite an earlier round's). Changed provider/model/checkout requires a fresh session; effort may change medium ↔ high.
+Run `node <skill>/scripts/reviewer.mjs REQUEST.json SESSION_DIR --dry-run` to inspect without invoking a model; omit `--dry-run` to execute. Resume using same directory and a new round ID, writing a new request and brief file per round (never overwrite an earlier round's). Changed provider/model/checkout requires a fresh session; effort may change between medium, high and xhigh.
 
 Helper passes stdin/arguments without a shell. Windows uses a native executable or Codex npm JavaScript entry point; optional `cli` specifies either. No visible window; logs stay private.
 
