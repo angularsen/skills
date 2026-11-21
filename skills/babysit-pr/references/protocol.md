@@ -35,7 +35,7 @@ Read general comments, source threads and submitted reviews. Pending private dra
 2. Reviewer finishes on those SHAs and the published PR/document snapshot, including closed/rejected findings, with explicit clear verdicts for function and conventions and a completed process result.
 3. Author verifies matching snapshot, verified/user-decided findings, passing relevant checks (or disclosed user-accepted exception), and no known review job/decision. Record its separate agreement.
 4. Re-read remote state and host-stored title/body after the verdict. Substantive changes restart triage/verification; prose/attachment edits restart the affected convention check. Update the summary.
-5. Complete by default (see SKILL.md Finish): set the squash message from the host-stored title and description, then enable auto-complete or merge. Do this only after companion PRs that must land first are merged. Stop at handoff instead only when the user asked for human review or the loop was model-triggered. If auto-complete is already armed and could merge during fixes, disable it until the gate passes again.
+5. Complete by default (see SKILL.md Finish): squash with the host default message (Azure CLI/API: pass it explicitly), then enable auto-complete or merge. Do this only after companion PRs that must land first are merged. Stop at handoff instead only when the user asked for human review or the loop was model-triggered. If auto-complete is already armed and could merge during fixes, disable it until the gate passes again.
 6. Verify the merged commit message on the target branch. A generic merge message or missing description is a failed ship: report it. Don't rewrite published history to fix it without authorization.
 
 ## Waiting
